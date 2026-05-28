@@ -15,15 +15,15 @@ public class MainApp {
             switch (choice) {
 
                 case "1":
-                    System.out.println("Шифрование");
+                    encryptMode();
                     break;
 
                 case "2":
-                    System.out.println("Расшифровка");
+                    decryptMode();
                     break;
 
                 case "3":
-                    System.out.println("Brute force");
+                    bruteForceMode();
                     break;
 
                 case "0":
@@ -125,5 +125,29 @@ public class MainApp {
         FileManager.writeFile(outputPath, decryptedText);
 
         System.out.println("Расшифровка завершена.");
+    }
+
+    private static void bruteForceMode() {
+
+        System.out.print("Введите путь к зашифрованному файлу: ");
+        String inputPath = scanner.nextLine();
+
+        if (!Validator.isFileExists(inputPath)) {
+            System.out.println("Файл не найден.");
+            return;
+        }
+
+        System.out.print("Введите путь для сохранения результата: ");
+        String outputPath = scanner.nextLine();
+
+        String encryptedText = FileManager.readFile(inputPath);
+
+        BruteForce bruteForce = new BruteForce();
+
+        String result = bruteForce.bruteForceDecrypt(encryptedText);
+
+        FileManager.writeFile(outputPath, result);
+
+        System.out.println("Brute force завершен.");
     }
 }
