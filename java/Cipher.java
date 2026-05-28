@@ -13,6 +13,10 @@ public class Cipher {
         return process(text, key);
     }
 
+    public String decrypt(String text, int key) {
+        return process(text, -key);
+    }
+
     private String process(String text, int shift) {
 
         StringBuilder result = new StringBuilder();
@@ -58,4 +62,9 @@ public class Cipher {
 
         return -1;
     }
+
+    public static int getAlphabetSize() {
+        return ALPHABET.length;
+    }
+
 }
